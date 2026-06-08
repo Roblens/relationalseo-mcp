@@ -36,16 +36,11 @@ complete API response is also returned as `structuredContent`.
 - A **RelationalSEO API token** with an active subscription. Find it on the API
   page of your RelationalSEO dashboard.
 
-## Install & build
+## Install
 
-```bash
-git clone https://github.com/Roblens/relationalseo-mcp.git
-cd relationalseo-mcp
-npm install
-npm run build
-```
-
-This produces `dist/index.js`, the server entry point.
+No clone or build required. The published package runs on demand via `npx` -
+just add it to your MCP client config (below) with your API token. To hack on the
+server itself, see [From source](#from-source).
 
 ## Configuration
 
@@ -65,8 +60,8 @@ Add to `claude_desktop_config.json`:
 {
   "mcpServers": {
     "relationalseo": {
-      "command": "node",
-      "args": ["/absolute/path/to/relationalseo-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "relationalseo-mcp-server"],
       "env": {
         "RELATIONALSEO_API_KEY": "your_token_here"
       }
@@ -75,24 +70,32 @@ Add to `claude_desktop_config.json`:
 }
 ```
 
+On Windows, if `npx` is not found, use `"command": "cmd"` with
+`"args": ["/c", "npx", "-y", "relationalseo-mcp-server"]`.
+
 ### Claude Code
 
 ```bash
-claude mcp add relationalseo \
+claude mcp add relationalseo -s user \
   --env RELATIONALSEO_API_KEY=your_token_here \
-  -- node /absolute/path/to/relationalseo-mcp/dist/index.js
+  -- npx -y relationalseo-mcp-server
 ```
 
-### Local development
+(Windows: end with `-- cmd /c npx -y relationalseo-mcp-server`.)
 
-Copy `.env.example` to `.env`, fill in your token, and run with the MCP
-Inspector:
+## From source
+
+To modify or contribute:
 
 ```bash
-npm run inspector
+git clone https://github.com/Roblens/relationalseo-mcp.git
+cd relationalseo-mcp
+npm install
+npm run build
 ```
 
-(Or `RELATIONALSEO_API_KEY=... npm run dev` for auto-reload during development.)
+This produces `dist/index.js`. Copy `.env.example` to `.env`, add your token, then
+run with the MCP Inspector (`npm run inspector`) or `npm run dev` for auto-reload.
 
 ## Rate limits & errors
 
