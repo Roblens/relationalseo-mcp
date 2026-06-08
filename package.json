@@ -1,0 +1,54 @@
+{
+  "name": "relationalseo-mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for the RelationalSEO (SEER) API - exposes the EntityOS, DiagnosticOS, DriftOS, PageOS, BacklinkOS, CredentialOS, GBPOS, VisionOS, ChatGPT-OS and combined diagnostic tools to MCP clients.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "relationalseo-mcp-server": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prepare": "npm run build",
+    "inspector": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "relationalseo",
+    "seo",
+    "entityos",
+    "roblens"
+  ],
+  "author": "Roblens Media",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roblens/relationalseo-mcp.git"
+  },
+  "homepage": "https://github.com/Roblens/relationalseo-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Roblens/relationalseo-mcp/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

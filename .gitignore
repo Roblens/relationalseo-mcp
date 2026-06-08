@@ -1,0 +1,30 @@
+# Dependencies & build output
+node_modules/
+dist/
+
+# Environment / secrets - NEVER commit the API token
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# ---------------------------------------------------------------------------
+# Local reference material - proprietary / internal, MUST NOT reach the public
+# repo. The saved API docs contain a (masked) API key, and the playbook is
+# marked "Internal Use Only".
+# ---------------------------------------------------------------------------
+api.html
+_bundle.js
+_endpoint_ctx.txt
+playbook.txt
+Roblens-Media-SEO-Playbook.docx
+*.docx
