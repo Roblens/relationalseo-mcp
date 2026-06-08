@@ -185,13 +185,27 @@ export function formatApiError(error: unknown): string {
         }
         return `Error 403 (forbidden): ${error.message}.`;
       case 429: {
+        // Two different 429s reach here. The app's documented account limit returns
+        // JSON with code "rate_limit_exceeded" (often plus retry_after_seconds). An
+        // upstream Google Frontend edge throttle returns text/html "Rate exceeded."
+        // with neither - that one is per-IP burst protection, not the account quota.
+        const isAccountLimit =
+          error.code === "rate_limit_exceeded" || error.retryAfterSeconds !== undefined;
+        if (!isAccountLimit) {
+          return (
+            "Error 429: upstream edge/infrastructure throttle - NOT your RelationalSEO " +
+            "account quota (that is unaffected). Triggered by sending many requests in a " +
+            "short burst; it usually clears within ~30-60 seconds. Wait briefly and retry, " +
+            "and avoid firing many calls at once."
+          );
+        }
         const wait =
           typeof error.retryAfterSeconds === "number"
             ? ` Retry after ${error.retryAfterSeconds} seconds (~${Math.ceil(error.retryAfterSeconds / 60)} min).`
             : "";
         return (
-          `Error 429 (rate_limit_exceeded): the hourly limit (40/hr for founding ` +
-          `members, 20/hr standard, shared across all endpoints) was exceeded.${wait}`
+          `Error 429 (rate_limit_exceeded): your RelationalSEO account hourly limit ` +
+          `(40/hr founding members, 20/hr standard, shared across all endpoints) was exceeded.${wait}`
         );
       }
       case 500:

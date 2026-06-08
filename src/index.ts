@@ -17,7 +17,7 @@ import { RelationalSeoClient } from "./services/client.js";
 import { registerTools } from "./tools/register.js";
 
 const SERVER_NAME = "relationalseo-mcp-server";
-const SERVER_VERSION = "0.1.0";
+const SERVER_VERSION = "0.1.1";
 
 function parseTimeout(raw: string | undefined): number {
   if (!raw) return DEFAULT_TIMEOUT_MS;
