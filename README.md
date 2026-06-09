@@ -1,5 +1,9 @@
 # RelationalSEO MCP Server
 
+[![npm version](https://img.shields.io/npm/v/relationalseo-mcp-server.svg)](https://www.npmjs.com/package/relationalseo-mcp-server)
+[![license](https://img.shields.io/npm/l/relationalseo-mcp-server.svg)](./LICENSE)
+[![node](https://img.shields.io/node/v/relationalseo-mcp-server.svg)](https://nodejs.org)
+
 An [MCP](https://modelcontextprotocol.io) server that exposes the
 **RelationalSEO (SEER)** diagnostic API as tools any MCP client (Claude Desktop,
 Claude Code, Cursor, etc.) can call.
@@ -38,9 +42,20 @@ complete API response is also returned as `structuredContent`.
 
 ## Install
 
-No clone or build required. The published package runs on demand via `npx` -
-just add it to your MCP client config (below) with your API token. To hack on the
-server itself, see [From source](#from-source).
+On npm as [`relationalseo-mcp-server`](https://www.npmjs.com/package/relationalseo-mcp-server) - no clone, no build. It runs on demand via `npx`.
+
+Fastest path (Claude Code):
+
+```bash
+claude mcp add relationalseo -s user \
+  --env RELATIONALSEO_API_KEY=YOUR_TOKEN \
+  -- npx -y relationalseo-mcp-server
+```
+
+(Windows, if `npx` is not found: end with `-- cmd /c npx -y relationalseo-mcp-server`.)
+
+For other clients, use the config in [Configuration](#configuration). To hack on
+the server itself, see [From source](#from-source).
 
 ## Configuration
 
