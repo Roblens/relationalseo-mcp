@@ -31,4 +31,9 @@ Roblens-Media-SEO-Playbook.docx
 # Scratch scripts (underscore-prefixed) - never commit
 _*.mjs
 _*.js
+
+# Local test fixtures
+test.jpeg
+test.jpg
+test.png
 *.docx
