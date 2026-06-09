@@ -9,6 +9,8 @@
  * reserved for the JSON-RPC protocol stream.
  */
 
+import { readFileSync } from "node:fs";
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
@@ -17,7 +19,13 @@ import { RelationalSeoClient } from "./services/client.js";
 import { registerTools } from "./tools/register.js";
 
 const SERVER_NAME = "relationalseo-mcp-server";
-const SERVER_VERSION = "0.1.1";
+// Read the version from package.json so it never drifts from the published one.
+// At runtime this file is dist/index.js, so ../package.json is the package root;
+// under tsx (src/index.ts) it resolves to the repo root package.json.
+const pkg = JSON.parse(
+  readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+) as { version?: string };
+const SERVER_VERSION = pkg.version ?? "0.0.0";
 
 function parseTimeout(raw: string | undefined): number {
   if (!raw) return DEFAULT_TIMEOUT_MS;

@@ -112,6 +112,21 @@ npm run build
 This produces `dist/index.js`. Copy `.env.example` to `.env`, add your token, then
 run with the MCP Inspector (`npm run inspector`) or `npm run dev` for auto-reload.
 
+## Releasing
+
+Publishing is automated via GitHub Actions. Bump the version and push a matching
+tag:
+
+```bash
+npm version patch        # or minor / major - updates package.json and tags
+git push --follow-tags
+```
+
+The `Publish to npm` workflow checks the tag matches `package.json`, then
+publishes with provenance. It needs a repo secret `NPM_TOKEN` (an npm token with
+write access). The server reports this version at runtime, so there is nothing
+else to bump.
+
 ## Rate limits & errors
 
 The API enforces a shared, rolling 60-minute limit across **all** endpoints -
