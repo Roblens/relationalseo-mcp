@@ -123,9 +123,11 @@ git push --follow-tags
 ```
 
 The `Publish to npm` workflow checks the tag matches `package.json`, then
-publishes with provenance. It needs a repo secret `NPM_TOKEN` (an npm token with
-write access). The server reports this version at runtime, so there is nothing
-else to bump.
+publishes with provenance. Authentication uses **npm Trusted Publishing (OIDC)** -
+no token or secret is stored. Configure it once on npmjs.com: the package's
+**Settings -> Trusted Publisher -> GitHub Actions**, with organization `Roblens`,
+repository `relationalseo-mcp`, and workflow `publish.yml`. The server reports this
+version at runtime, so there is nothing else to bump.
 
 ## Rate limits & errors
 
