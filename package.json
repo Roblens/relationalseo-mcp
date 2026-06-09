@@ -1,6 +1,6 @@
 {
   "name": "relationalseo-mcp-server",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "MCP server for the RelationalSEO (SEER) API - exposes the EntityOS, DiagnosticOS, DriftOS, PageOS, BacklinkOS, CredentialOS, GBPOS, VisionOS, ChatGPT-OS and combined diagnostic tools to MCP clients.",
   "type": "module",
   "main": "dist/index.js",
