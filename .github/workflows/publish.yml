@@ -32,7 +32,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "lts/*" # newest LTS automatically (24 now, 26 when it promotes ~Oct 2026)
           registry-url: "https://registry.npmjs.org"
 
       # Trusted Publishing needs a recent npm (>= 11.5.1); the bundled npm is older.
