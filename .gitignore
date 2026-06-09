@@ -27,4 +27,8 @@ _bundle.js
 _endpoint_ctx.txt
 playbook.txt
 Roblens-Media-SEO-Playbook.docx
+
+# Scratch scripts (underscore-prefixed) - never commit
+_*.mjs
+_*.js
 *.docx
