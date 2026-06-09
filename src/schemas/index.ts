@@ -27,7 +27,7 @@ const responseFormat = z
 
 const optionalLocation = (desc: string) => z.string().min(1).max(200).optional().describe(desc);
 
-// Accepts a full URL (https://example.com/...) OR a bare domain (example.com),
+// Accepts a full URL with an http(s) scheme OR a bare domain (host.tld),
 // matching the API's lenient min-length rule rather than strict RFC URL syntax.
 const URL_OR_DOMAIN = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i;
 const urlLike = (desc: string, min: number) =>
@@ -36,7 +36,7 @@ const urlLike = (desc: string, min: number) =>
     .trim()
     .min(min, `must be at least ${min} characters`)
     .refine((v) => URL_OR_DOMAIN.test(v), {
-      message: "must be a URL or bare domain (e.g. https://example.com or example.com)",
+      message: "must be a URL (with an http/https scheme) or a bare domain",
     })
     .describe(desc);
 
