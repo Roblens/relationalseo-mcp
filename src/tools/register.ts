@@ -6,6 +6,7 @@
  * upload) and the combined batch endpoint get bespoke handlers.
  */
 
+import { Blob } from "node:buffer";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
